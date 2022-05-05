@@ -1,14 +1,19 @@
 import React, { useRef, useState } from 'react';
 import { useRipple } from 'react-use-ripple';
 import { ItemType } from '../../interfaces';
-import { GroupItems, GroupTitle, GroupWrapper } from './styles';
+import {
+  TrGroupItems, TrGroupOpenIcon, TrGroupTitle, TrGroupWrapper,
+} from './styles';
 import GroupListItem from './GroupListItem/GroupListItem';
+import arrow from '../../assets/down-outline.svg';
 
 interface IItemGroupProps {
     items: ItemType[];
     groupName: string;
     checkedIds: string[];
     onCheck: (id: string) => void;
+    toggleMoveSingleItem: (id: string) => void;
+    selectionColor: string;
 }
 
 const TransferPanelGroup = (props: IItemGroupProps) => {
@@ -18,8 +23,8 @@ const TransferPanelGroup = (props: IItemGroupProps) => {
   useRipple(titleRef, { animationLength: 400 });
 
   return (
-    <GroupWrapper>
-      <GroupTitle
+    <TrGroupWrapper>
+      <TrGroupTitle
         ref={titleRef}
         isOpened={isOpened}
         onClick={() => setIsOpened(!isOpened)}
@@ -27,22 +32,22 @@ const TransferPanelGroup = (props: IItemGroupProps) => {
         <div style={{ fontSize: '1em' }}>
           {props.groupName}
         </div>
-        <span>
-          {isOpened ? '-' : '+'}
-        </span>
-      </GroupTitle>
+        <TrGroupOpenIcon isOpened={isOpened} src={arrow} alt="arrow" />
+      </TrGroupTitle>
 
-      <GroupItems isOpened={isOpened}>
+      <TrGroupItems isOpened={isOpened}>
         { props.items.map((item) => (
           <GroupListItem
             name={item.name}
+            selectionColor={props.selectionColor}
             isChecked={!!props.checkedIds.find((id) => id === item.id)}
             onCheck={() => props.onCheck(item.id)}
+            onDoubleClick={() => props.toggleMoveSingleItem(item.id)}
             key={item.id}
           />
         ))}
-      </GroupItems>
-    </GroupWrapper>
+      </TrGroupItems>
+    </TrGroupWrapper>
   );
 };
 

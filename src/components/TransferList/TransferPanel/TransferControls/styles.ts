@@ -11,11 +11,10 @@ export const ControlButton = styled.button`
 `;
 
 export const TransferControlWrapper = styled.div`
-    display: flex;
+  display: flex;
+  padding: 16px;
   column-gap: 16px;
   justify-content: center;
-  border-top: 1px solid black;
-  padding-top: 16px;
 `;
 
 export const TrControlArrow = styled.img`

@@ -5,10 +5,9 @@ export const sortItems = (items: any[]) => items.sort((a, b) => a.name.localeCom
 export const groupItems = (items: ItemType[]) => {
   const groupedItems: ItemType[] = [];
   const ungrouped: ItemType[] = [];
-  const grouped: GroupItem[] = [];
+  let grouped: GroupItem[] = [];
 
   items.forEach((item) => {
-    // eslint-disable-next-line no-unused-expressions
     !item.group ? ungrouped.push(item) : groupedItems.push(item);
   });
 
@@ -21,6 +20,8 @@ export const groupItems = (items: ItemType[]) => {
         grouped.push({ name: item.group || '', items: [item] });
       }
     });
+
+    grouped = grouped.map((item) => ({ name: item.name, items: sortItems(item.items) }));
   }
 
   return { grouped, ungrouped };

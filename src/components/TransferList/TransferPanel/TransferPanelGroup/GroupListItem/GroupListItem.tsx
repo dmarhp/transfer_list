@@ -1,29 +1,30 @@
 import React, { useRef } from 'react';
 import { useRipple } from 'react-use-ripple';
-import { GroupListItemBtn } from './styles';
+import { TrGroupListItemBtn } from './styles';
 
 interface IGroupItemProps {
     name: string;
+    selectionColor: string
     isChecked: boolean;
     onCheck: () => void;
+    onDoubleClick: () => void;
 }
 
-const GroupListItem = ({
-  name, isChecked, onCheck,
-}: IGroupItemProps) => {
-  const buttonRef = useRef(null);
-  useRipple(buttonRef, { animationLength: 400 });
+const GroupListItem = (props: IGroupItemProps) => {
+  const listItemRef = useRef(null);
+  useRipple(listItemRef, { animationLength: 400 });
 
   return (
     <div style={{ backgroundColor: '#bdbdbd', borderRadius: 4 }}>
-      <GroupListItemBtn
-        ref={buttonRef}
-        onClick={() => onCheck()}
-        color={isChecked ? '#bdbdbd' : '#ffffff'}
-        isSelected={isChecked}
+      <TrGroupListItemBtn
+        ref={listItemRef}
+        onClick={() => props.onCheck()}
+        onDoubleClick={() => props.onDoubleClick()}
+        color={props.isChecked ? props.selectionColor : '#ffffff'}
+        isSelected={props.isChecked}
       >
-        {name}
-      </GroupListItemBtn>
+        {props.name}
+      </TrGroupListItemBtn>
     </div>
   );
 };

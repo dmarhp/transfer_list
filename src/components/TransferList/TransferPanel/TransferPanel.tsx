@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GroupedItems, GroupItem, ItemType } from '../interfaces';
 import { groupItems } from '../utils';
-import { TransferPanelData, TransferPanelWrapper } from './styles';
+import { TrPanelDataScroll, TrPanelDataWrapper, TrPanelWrapper } from './styles';
 import TransferPanelGroup from './TransferPanelGroup/TransferPanelGroup';
 import TransferControls from './TransferControls/TransferControls';
 import TransferSearch from './TransferSearch/TransferSearch';
@@ -11,6 +11,7 @@ interface ITransferPanelProps {
     data: ItemType[];
     isSelected: boolean;
     title: string;
+    selectionColor: string;
     toggleMoveAll: () => void;
     toggleMoveChecked: (ids: string[]) => void;
 }
@@ -44,56 +45,66 @@ const TransferPanel = (props: ITransferPanelProps) => {
   };
 
   return (
-    <TransferPanelWrapper>
-      <span style={{ margin: 5 }}>{`${props.title}`}</span>
+    <TrPanelWrapper>
+      <TrPanelDataWrapper>
+        <span style={{ margin: 5, fontSize: '1rem' }}>{`${props.title}`}</span>
 
-      <TransferSearch
-        value={searchText}
-        onChange={(text) => setSearchText(text)}
-      />
+        <TransferSearch
+          value={searchText}
+          onChange={(text) => setSearchText(text)}
+        />
 
-      <TransferPanelData>
-        {items?.grouped.length > 0
-          ? (
-            <>
-              {items?.grouped.map((group: GroupItem) => (
+        <TrPanelDataScroll>
+          {items?.grouped.length > 0
+            ? (
+              <>
+                {items?.grouped.map((group: GroupItem) => (
+                  <TransferPanelGroup
+                    items={group.items}
+                    groupName={group.name}
+                    selectionColor={props.selectionColor}
+                    checkedIds={checkedIds}
+                    onCheck={(id) => onCheck(id)}
+                    toggleMoveSingleItem={(id) => props.toggleMoveChecked([id])}
+                    key={group.name}
+                  />
+                ))}
+
                 <TransferPanelGroup
-                  items={group.items}
-                  groupName={group.name}
+                  items={items.ungrouped}
+                  groupName="Ungrouped"
+                  selectionColor={props.selectionColor}
                   checkedIds={checkedIds}
                   onCheck={(id) => onCheck(id)}
-                  key={group.name}
+                  toggleMoveSingleItem={(id) => props.toggleMoveChecked([id])}
                 />
-              ))}
-
-              <TransferPanelGroup
-                items={items.ungrouped}
-                groupName="Ungrouped"
-                checkedIds={checkedIds}
-                onCheck={(id) => onCheck(id)}
-              />
-            </>
-          )
-          : (
-            <>
-              {items?.ungrouped.map((item) => (
-                <GroupListItem
-                  name={item.name}
-                  isChecked={!!checkedIds.find((id) => id === item.id)}
-                  onCheck={() => onCheck(item.id)}
-                  key={item.id}
-                />
-              ))}
-            </>
-          )}
-      </TransferPanelData>
+              </>
+            )
+            : (
+              <>
+                {items?.ungrouped.map((item) => (
+                  <GroupListItem
+                    name={item.name}
+                    selectionColor={props.selectionColor}
+                    isChecked={!!checkedIds.find((id) => id === item.id)}
+                    onCheck={() => onCheck(item.id)}
+                    onDoubleClick={() => props.toggleMoveChecked([item.id])}
+                    key={item.id}
+                  />
+                ))}
+              </>
+            )}
+        </TrPanelDataScroll>
+      </TrPanelDataWrapper>
 
       <TransferControls
         isSelected={props.isSelected}
         toggleMoveChecked={() => moveChecked()}
         toggleMoveAll={() => props.toggleMoveAll()}
       />
-    </TransferPanelWrapper>
+
+    </TrPanelWrapper>
+
   );
 };
 

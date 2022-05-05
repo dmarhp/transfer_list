@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-expressions */
-
 import React, { useRef } from 'react';
 import { useRipple } from 'react-use-ripple';
 import { ControlButton, TransferControlWrapper, TrControlArrow } from './styles';
@@ -33,8 +31,6 @@ const TransferControls = (props: ITransferControlsProps) => {
       <TrControlArrow src={icon} alt="arrow" />
     </div>
   );
-
-  const textValues = props.isSelected ? [[leftIcon, leftIcon], leftIcon] : ['<', '<<'];
 
   const onRightButtonClick = () => {
     props.isSelected ? props.toggleMoveChecked() : props.toggleMoveAll();

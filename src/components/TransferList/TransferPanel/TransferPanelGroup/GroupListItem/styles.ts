@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 
-interface IProps {
-    isSelected: boolean
-    grouped?: boolean
-}
-
-// eslint-disable-next-line import/prefer-default-export
-export const GroupListItemBtn = styled.button<IProps>`
+export const TrGroupListItemBtn = styled.button<{isSelected: boolean}>`
   border: none;
   width: 100%;
   padding: 4px 16px;
@@ -17,10 +11,8 @@ export const GroupListItemBtn = styled.button<IProps>`
   opacity: 1;
   background-color: ${({ isSelected }) => (isSelected ? '#64b5f6' : 'white')};
   font-size: 1em;
-  
-  &:hover{
+
+  &:hover {
     opacity: 0.7;
   }
-    `;
-
-export const c123 = 123;
+`;

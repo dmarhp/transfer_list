@@ -10,7 +10,9 @@ interface ITransferSearchProps{
 const TransferSearch = ({ value, onChange }: ITransferSearchProps) => (
   <TrSearchWrapper>
     <TrSearchIcon src={icon} />
+
     <TrSearch
+      placeholder="Search..."
       value={value}
       onChange={(ev) => onChange(ev.target.value)}
     />

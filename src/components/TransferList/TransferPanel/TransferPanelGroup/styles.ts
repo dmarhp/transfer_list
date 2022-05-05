@@ -1,43 +1,35 @@
 import styled from 'styled-components';
 
-export const GroupWrapper = styled.div<{ grouped?: boolean }>`
-  //background-color: red;
+export const TrGroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //row-gap: 4px;
-  //padding: 4px;
   border-radius: 4px;
- border: 1px solid #bdbdbd;
+  border: 1px solid #bdbdbd;
   overflow: hidden;
   margin-bottom: 8px;
 `;
 
-export const GroupTitle = styled.div<{isOpened : boolean}>`
+export const TrGroupTitle = styled.div<{ isOpened: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 4px 8px;
-  //min-height: 32px;
-  //border-radius: 4px;
-  background-color: ${({ isOpened }) => (isOpened ? '#eee' : '#bdbdbd')};
-  ${({ isOpened }) => isOpened
-      && ('transition: all ease-in-out 0.3s;')}
+  padding: 8px;
+  background-color: ${({ isOpened }) => (isOpened ? '#f5f5f5' : '#e0e0e0')};
+  transition: all linear 0.1s;
 `;
 
-export const GroupItems = styled.div<{ isOpened: boolean }>`
-  //${({ isOpened }) => (isOpened ? 'flex' : 'none')}
-  max-height: 0;
+export const TrGroupItems = styled.div<{ isOpened: boolean }>`
+  height: ${({ isOpened }) => (isOpened ? '100%' : '0')};
   overflow: hidden;
-  transition: all linear 0.3s;
   text-align: left;
   display: flex;
   flex-direction: column;
-  //margin: ${({ isOpened }) => (isOpened ? '4px 12px' : '0 12px')};
-  //row-gap: 4px;
-  //padding-bottom: 4px;
-  opacity: 1;
-  
-    ${({ isOpened }) => isOpened
-      && ('max-height: 100%; transition: all linear 0.05s;')}
+`;
+
+export const TrGroupOpenIcon = styled.img<{ isOpened: boolean }>`
+  width: 16px;
+  transform: rotate(0);
+  ${({ isOpened }) => isOpened && 'transform: rotate(180deg);'};
+  transition: transform 0.2s linear;
 `;

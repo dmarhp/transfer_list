@@ -1,6 +1,6 @@
 import { ItemType } from './TransferList/interfaces';
 
-const allGrouped: ItemType[] = [
+export const allGrouped: ItemType[] = [
   {
     name: 'Steven Ballard',
     id: 'EC681246-80AE-EDBE-2DFE-3851D7A53EB7',
@@ -128,7 +128,7 @@ export const selectedGroup = [
   },
 ];
 
-const allUngrouped: ItemType[] = [
+export const allUngrouped: ItemType[] = [
   {
     name: 'Steven Ballard',
     id: 'EC681246-80AE-EDBE-2DFE-3851D7A53EB7',
@@ -233,6 +233,3 @@ export const selectedUngroup = [
     id: 'EB5CC59C-2C65-8ABB-B049-4E7A5243D58C',
   },
 ];
-
-export const allTest = allGrouped;
-export const selectedTest = selectedGroup;

@@ -8,6 +8,7 @@ interface ITransferListProps {
     allItems: ItemType[];
     selectedTitle: string;
     availableTitle: string;
+    selectionColor: string;
 }
 
 const TransferList = (props: ITransferListProps) => {
@@ -52,6 +53,7 @@ const TransferList = (props: ITransferListProps) => {
         data={selected}
         isSelected
         title={props.selectedTitle}
+        selectionColor={props.selectionColor}
         toggleMoveAll={() => moveAll(true)}
         toggleMoveChecked={(ids) => moveChecked(ids, true)}
       />
@@ -60,6 +62,7 @@ const TransferList = (props: ITransferListProps) => {
         data={available}
         isSelected={false}
         title={props.availableTitle}
+        selectionColor={props.selectionColor}
         toggleMoveAll={() => moveAll(false)}
         toggleMoveChecked={(ids) => moveChecked(ids, false)}
       />

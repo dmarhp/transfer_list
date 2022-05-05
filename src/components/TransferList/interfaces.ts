@@ -4,11 +4,6 @@ export interface ItemType {
     group?: string;
 }
 
-export interface GroupType {
-    groupId: string;
-    groupName: string;
-}
-
 export interface GroupItem {
     name: string;
     items: ItemType[];

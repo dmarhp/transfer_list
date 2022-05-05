@@ -6,7 +6,3 @@ export const TrWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
 `;
-
-export const TransferColumn = styled.div`
-  padding: 8px;
-`;
